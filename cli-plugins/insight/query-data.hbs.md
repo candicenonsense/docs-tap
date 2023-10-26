@@ -7,7 +7,7 @@ files.
 
 ## <a id='sup-usecase'></a>Supported use cases
 
-The following are use cases supported by the CLI:
+The following use cases are supported by the Tanzu Insight CLI plug-in:
 
 - What packages and CVEs exist in a particular image? (`image`)
 - What packages and CVEs exist in my source code? (`source`)
@@ -15,9 +15,7 @@ The following are use cases supported by the CLI:
 
 ## <a id='query-insight'></a> Query using the Tanzu Insight CLI plug-in
 
-[Install the Tanzu Insight CLI plug-in](cli-installation.md) if you have not already done so.
-
-There are four commands for querying and adding data.
+There are four commands for querying and adding data:
 
 - `image` - [Post an image SBOM](add-data.md) or query images for packages and vulnerabilities.
 - `package` - Query packages for vulnerabilities or by image or source code.
@@ -28,17 +26,12 @@ Use `tanzu insight -h` or for more information, see [Tanzu Insight Details](cli-
 
 ## <a id='example1'></a>Example 1: What packages and CVEs does a specific image contain?
 
-### Determining an image's digest
+To query an image scan for vulnerabilities, you need the image digest, which you can get from
+the image scan resource.
 
-To query an image scan for vulnerabilities, you need the image's digest, which you can get from the image scan resource.
+### Find the image digest using Supply Chain Tools - Scan 2.0
 
-#### When using Supply Chain Tools - Scan 2.0
-
-When using Supply Chain Tools - Scan 2.0, find the image digest by looking inside the corresponding image vulnerability scan custom resource.
-
-#### Find an image's digest using Supply Chain Tools - Scan 2.0
-
-When using Supply Chain Tools - Scan 2.0, find the image digest by looking inside the corresponding
+Find the image digest by looking inside the corresponding
 image vulnerability scan custom resource.
 
 To get a list of image vulnerability scans, run:
@@ -69,7 +62,8 @@ For example:
 kubectl describe imagevulnerabilityscan tanzu-java-web-app-grype-scan-jb76m -n my-apps
 ```
 
-In the resource, look for the `Spec.Image` field. The value points to the image that was scanned, including its digest.
+In the resource, look for the `Spec.Image` field. The value points to the image that was scanned,
+including its digest.
 
 For example:
 
@@ -78,9 +72,11 @@ Spec:
   Image: fake.oci-registry.io/dev-cluster/supply-chain-apps/tanzu-java-web-app-my-apps@sha256:a24a8d8eb724b6816f244925cc6625a84c15f6ced6a19335121343424be693cd
 ```
 
-In this example, the image's digest is: `sha256:a24a8d8eb724b6816f244925cc6625a84c15f6ced6a19335121343424be693cd`
+In this example, the image digest is: `sha256:a24a8d8eb724b6816f244925cc6625a84c15f6ced6a19335121343424be693cd`
 
-When using Supply Chain Tools - Scan Pre-2.0, find the image digest by looking inside the corresponding image scan custom resource.
+### Find the image digest using Scan Pre-2.0
+
+Find the image digest by looking inside the corresponding image scan custom resource.
 
 Run:
 
@@ -94,7 +90,8 @@ For example:
 kubectl get imagescan tanzu-java-web-app -n my-apps
 ```
 
-In the resource, look for the `Spec.Registry.Image` field. The value points to the image that was scanned, including its digest.
+In the resource, look for the `Spec.Registry.Image` field. The value points to the image that
+was scanned, including its digest.
 
 For example:
 
@@ -104,9 +101,11 @@ Spec:
     Image: fake.oci-registry.io/dev-cluster/supply-chain-apps/tanzu-java-web-app-my-apps@sha256:e8c648533c4c7440ee9a93142ac7480205e0f7669e4f86771cede8bfaacdc2cf
 ```
 
-In this example, the image's digest is: `sha256:e8c648533c4c7440ee9a93142ac7480205e0f7669e4f86771cede8bfaacdc2cf`
+In this example, the image digest is: `sha256:e8c648533c4c7440ee9a93142ac7480205e0f7669e4f86771cede8bfaacdc2cf`
 
-### Image querying with image digest
+### Query an image with image digest
+
+When you have found the image digest value, you can query an image using this value.
 
 Run:
 
@@ -138,11 +137,15 @@ Packages:
 ...
 ```
 
-## <a id='example2'></a>Example #2: What packages and CVEs does my source code contain?
+## <a id='example2'></a>Example 2: What packages and CVEs does my source code contain?
 
-### Determining source code org, repo, and commit SHA
+When you find the source code organization, repository or commit SHA, you can use these to query
+the source code in more detail:
 
-To query a source scan for vulnerabilities, you need a Git org and Git repository, or the commit SHA.  Find these by examining the source scan resource.
+### Find the source code organization, repository, and commit SHA
+
+To query a source scan for vulnerabilities, you need a Git organization and Git repository, or the commit
+SHA. Find these by examining the source scan resource.
 
 Run:
 
@@ -167,15 +170,14 @@ Spec:
     URL:          http://source-controller.flux-system.svc.cluster.local./gitrepository/my-apps/tanzu-java-web-app-gitops/c7e4c27ba43250a4b7c46f030355c108aa73cc39.tar.gz
 ```
 
-In the earlier example, the URL is parsed and split into the org and repo. Revision is parsed as the commit SHA.
+The URL is parsed and split into the organization and repository.
+Revision is parsed as the commit SHA.
 
-- Org is parsed as `gitrepository`
-- Repo is parsed as `my-apps/tanzu-java-web-app-gitops/c7e4c27ba43250a4b7c46f030355c108aa73cc39.tar.gz`
+- Organization is parsed as `gitrepository`
+- Repository is parsed as `my-apps/tanzu-java-web-app-gitops/c7e4c27ba43250a4b7c46f030355c108aa73cc39.tar.gz`
 - Commit SHA is parsed as `master/c7e4c27ba43250a4b7c46f030355c108aa73cc39`
 
-Use this information to perform your search.
-
-### Source code query with repo and org
+### Query the source code using repository and organization
 
 Run:
 
@@ -185,8 +187,8 @@ tanzu insight source get --repo REPO --org ORG
 
 Where:
 
-- `REPO` specifies the repository. For example, java-web-app, my-apps/java-web-app/c7ls8bakd87sakjda8d7.tar.gz
-- `ORG` is the source code's organization. For example, gitrepository, gitrepositiory-kj32kal8
+- `REPO` specifies the repository. For example, `java-web-app`, `my-apps/java-web-app/c7ls8bakd87sakjda8d7.tar.gz`
+- `ORG` is the source code's organization. For example, `gitrepository`, `gitrepositiory-kj32kal8`
 
 For example:
 
@@ -204,7 +206,7 @@ Packages:
 		3. github.com/valyala/bytebufferpool@v1.0.0
 ```
 
-### Source code query with commit SHA
+### Query the source code using commit SHA
 
 Run:
 
@@ -232,7 +234,7 @@ Packages:
 		3. github.com/Microsoft/go-winio@v0.5.2
 ```
 
-## <a id='example3'></a>Example #3: What dependencies are affected by a specific CVE?
+## <a id='example3'></a>Example 3: What dependencies are affected by a specific CVE?
 
 Run:
 
@@ -258,4 +260,4 @@ Packages:
 
 ## <a id='add-data'></a>Add data
 
-For more information about manually adding data, see [Add data to your Supply Chain Security Tools - Store](add-data.hbs.md).
+For information about manually adding data, see [Add data to your Supply Chain Security Tools - Store](add-data.hbs.md).
