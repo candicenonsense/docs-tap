@@ -110,7 +110,7 @@ This release has the following known issues, listed by component and area.
 
 #### <a id='1-6-5-tap-ki'></a> v1.6.5 Known issues: Tanzu Application Platform
 
-- Tanzu Application Platform v1.6.5 is not supported with Tanzu Kubernetes releases (TKR) v1.26.5 on
+- Tanzu Application Platform v1.6.5 is not supported with Tanzu Kubernetes releases (TKR) v1.26 on
   vSphere with Tanzu v8.
 
 #### <a id='1-6-5-amr-obs-ce-hndlr-ki'></a> v1.6.5 Known issues: Artifact Metadata Repository Observer and CloudEvent Handler
@@ -507,7 +507,7 @@ This release has the following known issues, listed by component and area.
 
 #### <a id='1-6-4-tap-ki'></a> v1.6.4 Known issues: Tanzu Application Platform
 
-- Tanzu Application Platform v1.6.4 is not supported with Tanzu Kubernetes releases (TKR) v1.26.5
+- Tanzu Application Platform v1.6.4 is not supported with Tanzu Kubernetes releases (TKR) v1.26
   on vSphere with Tanzu v8.
 
 #### <a id='1-6-4-amr-obs-ce-hndlr-ki'></a> v1.6.4 Known issues: Artifact Metadata Repository Observer and CloudEvent Handler
@@ -916,7 +916,7 @@ This release has the following known issues, listed by component and area.
 
 #### <a id='1-6-3-tap-ki'></a> v1.6.3 Known issues: Tanzu Application Platform
 
-- Tanzu Application Platform v1.6.3 is not supported with Tanzu Kubernetes releases (TKR) v1.26.5
+- Tanzu Application Platform v1.6.3 is not supported with Tanzu Kubernetes releases (TKR) v1.26
   on vSphere with Tanzu v8.
 
 #### <a id='1-6-3-app-config-srvc-ki'></a> v1.6.3 Known issues: Application Configuration Service
@@ -1898,9 +1898,9 @@ This release includes the following changes, listed by component and area.
 
 #### <a id='1-6-1-contour-br'></a> v1.6.1 Breaking changes: Contour
 
-- By default, Tanzu Application Platform uses TLS 1.3 as the minimum TLS version 
-for Contour. Certain infrastructure setups might cause request failures if the 
-Envoy clients do not support TLS 1.3. You might see the following errors in the 
+- By default, Tanzu Application Platform uses TLS 1.3 as the minimum TLS version
+for Contour. Certain infrastructure setups might cause request failures if the
+Envoy clients do not support TLS 1.3. You might see the following errors in the
 Envoy logs:
 
     ```console
