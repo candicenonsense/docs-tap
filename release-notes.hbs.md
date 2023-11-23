@@ -54,7 +54,7 @@ This release has the following known issues, listed by component and area.
 
 #### <a id='1-5-7-tap-ki'></a> v1.5.7 Known issues: Tanzu Application Platform
 
-- Tanzu Application Platform v1.5.7 is not supported with Tanzu Kubernetes releases (TKR) v1.26.5
+- Tanzu Application Platform v1.5.7 is not supported with Tanzu Kubernetes releases (TKR) v1.26
   on vSphere with Tanzu v8.
 
 ---
@@ -265,7 +265,7 @@ This release has the following known issues, listed by component and area.
 
 #### <a id='1-5-6-tap-ki'></a> v1.5.6 Known issues: Tanzu Application Platform
 
-- Tanzu Application Platform v1.5.6 is not supported with Tanzu Kubernetes releases (TKR) v1.26.5
+- Tanzu Application Platform v1.5.6 is not supported with Tanzu Kubernetes releases (TKR) v1.26
   on vSphere with Tanzu v8.
 
 ---
@@ -403,7 +403,7 @@ This release has the following known issues, listed by component and area.
 
 #### <a id='1-5-5-tap-ki'></a> v1.5.5 Known issues: Tanzu Application Platform
 
-- Tanzu Application Platform v1.5.5 is not supported with Tanzu Kubernetes releases (TKR) v1.26.5
+- Tanzu Application Platform v1.5.5 is not supported with Tanzu Kubernetes releases (TKR) v1.26
   on vSphere with Tanzu v8.
 
 ---
