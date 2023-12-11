@@ -563,3 +563,30 @@ restricted Pod Security Standard.
 
 1. Apply the new template to your cluster.
 1. Update the `tap-values.yaml` file to use the new template in your workloads.
+
+### <a id="pss-panic"></a> Panic when `container.SecurityContext` is provided but some fields empty
+
+**Symptom:**
+
+When `container.SecurityContext` is provided and the `Capabilities` or `SeccompProfile` field is
+empty, the controller will panic. For example:
+
+  ```yaml
+  securityContext:
+    privileged: true
+    runAsNonRoot: false
+  ```
+
+**Solution:**
+
+Provide default values for the `Capabilities` or `SeccompProfile` field:
+
+  ```yaml
+  securityContext:
+    allowPrivilegeEscalation: true
+    capabilities: {}
+    privileged: true
+    runAsNonRoot: false
+    seccompProfile:
+      type: RuntimeDefault
+  ```
